@@ -61,6 +61,11 @@ function List() {
         setLng(lng);
     }
 
+    /**
+     * Handles closing the map window and details module
+     *
+     * @param {Event} event
+     */
     function handleClose(event) {
         event.preventDefault();
         setPopup(false);

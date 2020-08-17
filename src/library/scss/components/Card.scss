@@ -40,6 +40,8 @@
             rgba(0, 212, 255, 1) 100%
         );
         padding: $space-s-med;
+        position: absolute;
+        bottom: 0;
         width: 100%;
         .card-heading__title {
             margin-bottom: $space-s !important;

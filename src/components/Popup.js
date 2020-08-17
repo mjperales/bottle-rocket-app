@@ -1,5 +1,4 @@
 import React from 'react';
-import Map from '../library/images/details-map-temp.png';
 import MyMap from '../components/MyMap';
 import '../library/scss/components/Popup.scss';
 
