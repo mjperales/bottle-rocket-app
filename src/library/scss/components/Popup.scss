@@ -40,8 +40,9 @@
         position: absolute;
         text-align: center;
         top: 0;
-        right: 0;
+        left: 0;
         width: 50px;
+        z-index: 9999999;
     }
 }
 

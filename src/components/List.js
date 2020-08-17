@@ -12,6 +12,8 @@ function List() {
     const [address2, setAddress2] = useState('');
     const [phone, setPhone] = useState('');
     const [twitter, setTwitter] = useState('');
+    const [lat, setLat] = useState('');
+    const [lng, setLng] = useState('');
     const [data, setData] = useState({ restaurants: [] });
 
     useEffect(() => {
@@ -38,7 +40,16 @@ function List() {
     function handleClick(event) {
         event.preventDefault();
         event.persist();
-        const { title, category, address, address2, phone, twitter } = event.currentTarget.dataset;
+        const {
+            title,
+            category,
+            address,
+            address2,
+            phone,
+            twitter,
+            lat,
+            lng,
+        } = event.currentTarget.dataset;
         setTitle(title);
         setCategory(category);
         setAddress(address);
@@ -46,6 +57,8 @@ function List() {
         setPhone(phone);
         setTwitter(twitter);
         setPopup(true);
+        setLat(lat);
+        setLng(lng);
     }
 
     function handleClose(event) {
@@ -64,6 +77,8 @@ function List() {
                 twitter={twitter}
                 slide={popup ? 'slide-in' : ''}
                 handleClose={handleClose}
+                lat={lat}
+                lng={lng}
             />
             <div className="flexbox _wrap _space-between">
                 {loading ? <Loading /> : null}

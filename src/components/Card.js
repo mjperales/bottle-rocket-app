@@ -11,6 +11,8 @@ const Card = ({ handleClick, image, title, category, location, contact }) => {
             data-address2={`${location.city}, ${location.state} ${location.postalCode}`}
             data-phone={contact === null ? '' : contact.formattedPhone}
             data-twitter={contact === null ? '' : contact.twitter}
+            data-lat={location.lat}
+            data-lng={location.lng}
             className="card flexbox _align-items-end stop-bleed"
         >
             <div className="card__image">
