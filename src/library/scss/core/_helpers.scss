@@ -1,0 +1,298 @@
+//======================
+// HELPER CLASSES
+//======================
+
+// Visiually Hidden
+.visuallyhidden {
+    border: 0 none;
+    clip: rect(0, 0, 0, 0);
+    font-size: 0;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.stop-bleed {
+    overflow: hidden;
+}
+
+.position-relative {
+    position: relative;
+}
+
+// for backwards compatibility ONLY
+// Let's start to phase these out...
+//
+//  Margin bottom
+.below6 {
+    margin-bottom: 6px;
+}
+
+.below12 {
+    margin-bottom: 12px;
+}
+
+.below18 {
+    margin-bottom: 18px;
+}
+
+.below30 {
+    margin-bottom: 30px;
+}
+
+.below36 {
+    margin-bottom: 36px;
+}
+
+.below47 {
+    margin-bottom: 47px;
+}
+
+.below48 {
+    margin-bottom: 48px;
+}
+
+// Margin top
+.top6 {
+    margin-top: 6px;
+}
+
+.top12 {
+    margin-top: 12px;
+}
+
+.top18 {
+    margin-top: 18px;
+}
+
+.top24 {
+    margin-top: 24px;
+}
+
+.top30 {
+    margin-top: 30px;
+}
+
+.top36 {
+    margin-top: 36px;
+}
+
+.top48 {
+    margin-top: 48px;
+}
+
+.top56 {
+    margin-top: 56px;
+}
+
+// =========================================================
+// updated helper classes to reflect spacing variables
+// IMPORTANT: Only use the ones below.
+// =========================================================
+
+// Margin bottom
+.below4 {
+    margin-bottom: 4px;
+}
+
+.below8 {
+    margin-bottom: 8px;
+}
+
+.below16 {
+    margin-bottom: 16px;
+}
+
+.below32 {
+    margin-bottom: 32px;
+}
+
+.below64 {
+    margin-bottom: 64px;
+}
+
+//  Margin top
+.top4 {
+    margin-top: 4px;
+}
+
+.top8 {
+    margin-top: 8px;
+}
+
+.top16 {
+    margin-top: 16px;
+}
+
+.top32 {
+    margin-top: 32px;
+}
+
+.top64 {
+    margin-top: 64px;
+}
+
+//  Remove Padding
+.pad-t0 {
+    padding-top: 0;
+}
+
+.pad-b0 {
+    padding-bottom: 0;
+}
+
+.pad-r0 {
+    padding-right: 0;
+}
+
+.pad-l0 {
+    padding-left: 0;
+}
+
+.pad-tb0 {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.pad-lr0 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+//  Remove Margin
+.mar-t0 {
+    margin-top: 0;
+}
+
+.mar-b0 {
+    margin-bottom: 0;
+}
+
+.mar-l0 {
+    margin-left: 0;
+}
+
+.mar-r0 {
+    margin-right: 0;
+}
+
+.mar-tb0 {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.mar-lr0 {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+//  Text alignment
+.alignl {
+    text-align: left;
+}
+
+.alignr {
+    text-align: right;
+}
+
+.alignc {
+    text-align: center;
+}
+
+// Text transform */
+.lowercase {
+    text-transform: lowercase;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+// .small {
+//     font-size: $font-small;
+// }
+
+.full-width {
+    width: 100%;
+}
+
+.line-height-1 {
+    line-height: 1;
+}
+
+.not-mobile {
+    display: none;
+
+    @include media($large-screen) {
+        display: block;
+    }
+}
+
+// .not-desktop {
+//     display: block;
+
+//     @include media($between-screen) {
+//         display: none;
+//     }
+// }
+
+.reset-border-radius {
+    border-radius: 0 !important;
+}
+
+// // Font helpers.
+// .sourcesans {
+//     font-family: $font-sourcesans;
+// }
+
+// .playfair {
+//     font-family: $font-playfair;
+// }
+
+// .oswald {
+//     font-family: $font-oswald;
+// }
+
+.bold {
+    font-weight: $font-bold;
+}
+
+.font-normal {
+    font-weight: $font-normal;
+}
+
+.italic {
+    font-style: italic;
+}
+
+// Color helpers
+// .bg-purple {
+//     background-color: $purple;
+// }
+
+.txt-purple {
+    color: $purple;
+}
+
+.bg-lightgrey {
+    background-color: $light-grey;
+}
+
+.bg-darkgrey2 {
+    background-color: $dark-grey2;
+}
+
+// .bg-yellow {
+//     background-color: $secondary-yellow;
+// }
+
+.txt-white {
+    color: $white;
+}
+
+.text-shadow {
+    text-shadow: 2px 3px 3px $black;
+}

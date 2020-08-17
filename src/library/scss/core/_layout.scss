@@ -1,0 +1,62 @@
+//======================================================
+// Layout
+//======================================================
+
+// overall wrapper of the website
+.layout-container {
+    margin: 0 auto;
+    max-width: $max-width;
+    overflow: hidden;
+}
+
+// No max-width. Adds padding instead
+.layout-constrain {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 5.5%;
+    padding-right: 5.5%;
+}
+
+// Centers a block element
+.layout-center {
+    @include margin(null auto);
+
+    width: 100%;
+}
+
+.content-wrapper {
+    padding-top: $space-m;
+
+    @include media($medium-screen) {
+        padding-bottom: $space-l;
+        padding-top: $space-l;
+    }
+}
+
+.background {
+    &._lime-green {
+        background-color: $lime-green;
+        color: $white;
+        padding: $space-default;
+    }
+    &._green {
+        background-color: $green;
+        color: $white;
+        padding: $space-s-med;
+    }
+    &.__dark {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+.heading-shape {
+    position: relative;
+    text-align: center;
+    width: 100%;
+
+    .heading-shape__icon {
+        position: absolute;
+        right: $space-m-l;
+        top: $space-m-l;
+    }
+}

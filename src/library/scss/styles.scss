@@ -1,0 +1,12 @@
+// Grab all our partials
+// CORE
+@import 'core/variables';
+@import 'core/mixins';
+@import 'core/normalize';
+@import 'core/base';
+@import 'core/typography';
+@import 'core/helpers';
+
+// layout
+@import 'core/layout';
+@import 'core/flexbox';

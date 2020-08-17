@@ -1,0 +1,9 @@
+{
+  "browserslist": [
+    "> 2%",
+    "last 4 versions",
+    "Safari 8",
+    "IE 9",
+    "IE 8",
+  ]
+}

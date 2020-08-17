@@ -1,0 +1,97 @@
+//======================================
+// Variables - include colors and fonts
+//======================================
+
+// Screen Sizes
+$small-screen: 30.0625em !default; // 481px
+$medium-screen: 43.75em !default; // 700px
+$large-screen: 62.5em !default; // 1000px
+$xl-screen: 87.5em !default; // 1400px
+
+// Primary Colors
+$white: #fff;
+$black: #111;
+$purple: #4d1979;
+$light-purple: #714793;
+$horned-frog-grey: #a3a9ac;
+$green: #34b379;
+$lime-green: #43e895;
+
+// Grey
+$dark-grey: #777;
+$dark-grey2: #4d4d4a;
+$grey: #999;
+$light-grey: #eee;
+$light-grey2: #ccc;
+$text-color: $dark-grey2;
+
+$body-bg: $white;
+$body-color: $black;
+
+//========================
+// FOCUS COLORS
+//========================
+$focus-yellow: 0 0 2px rgba(254, 210, 119, 1);
+$focus-purple: 0 0 2px rgba(77, 25, 121, 1);
+$focus-black: 0 0 2px rgba(17, 17, 17, 1);
+$focus-blue: 0 0 2px rgba(30, 140, 190, 1);
+
+// Overlays
+$purple-overlay: rgba(77, 25, 121, 0.7);
+$overlay-white: rgba(255, 255, 255, 0.6);
+
+//========================
+// FONTS
+//========================
+$font-avenir: 'Avenir', sans-serif;
+
+$font-body: $font-avenir;
+$font-headlines: $font-avenir;
+
+// it's best practice to use rems or ems
+// your comps contains pixels and the font size
+// is too small so I had to guess the size
+$font-normal: 400;
+$font-bold: 700;
+
+$base-font-size: 16px;
+$h1-font-size: 3rem; //    48px
+$h1-font-min: 2rem; // 32px
+
+$h2-font-size: 2.5rem; //  40px
+$h2-font-min: 1.75rem; //28px
+
+$h3-font-size: 2rem; //    32px
+$h3-font-min: 1.5rem; // 24px
+
+$h4-font-size: 1.75rem; // 28px
+$h4-font-min: 1rem; // 16px
+
+$h5-font-size: 1.5rem; //24px
+$h5-font-min: 1rem; // 16px
+
+$h6-font-size: 1.25rem; // 20px
+$h6-font-min: 1rem; // 16px
+
+// For fluid type
+$min-width: 300px;
+$max-width: 1800px;
+
+//========================
+// SPACING
+//========================
+$space-default: 16px;
+$space-xs: 4px;
+$space-s: 6px;
+$space-s-med: 12px;
+$space-m: 16px;
+$space-m-l: 26px;
+$space-l: 32px;
+$space-xl: 64px;
+
+$section-divider: 1px solid $horned-frog-grey;
+
+//=========================
+// FORMS
+//=========================
+$form-shadow: inset 0 1px 2px rgba(17, 17, 17, 0.1);

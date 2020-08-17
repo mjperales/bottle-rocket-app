@@ -1,0 +1,48 @@
+@import '../core/variables';
+@import '../core/mixins';
+
+.card {
+    text-align: left;
+    background-color: transparent;
+    border: 0;
+    color: $white;
+    cursor: pointer;
+    height: 180px;
+    margin: $space-default;
+    max-width: 300px;
+    padding: 0;
+    position: relative;
+    width: 100%;
+
+    @include media($large-screen) {
+        max-width: 400px;
+    }
+
+    .card__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        img {
+            height: auto;
+            max-width: 100%;
+        }
+    }
+
+    .card-headings {
+        background-color: transparent;
+        background: linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(255, 255, 255, 0) 100%,
+            rgba(0, 212, 255, 1) 100%
+        );
+        padding: $space-s-med;
+        width: 100%;
+        .card-heading__title {
+            margin-bottom: $space-s !important;
+        }
+    }
+}
