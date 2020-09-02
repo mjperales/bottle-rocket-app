@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import lists from './list-reducer';
+import { restaurantReducer } from './restaurant-reducer';
 
 export default combineReducers({
-    lists,
+    restaurantReducer,
 });

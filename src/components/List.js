@@ -1,43 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import Card from './Card';
 import Loading from './Loading';
 import Popup from './Popup';
+import {
+    getRestaurants,
+    getRestaurantsPending,
+    getRestaurantsError,
+} from '../reducers/restaurant-reducer';
+import { fetchRestaurants } from '../actions';
 
-function List() {
-    const [loading, setLoading] = useState(true);
-    const [popup, setPopup] = useState(false);
-    const [title, setTitle] = useState('');
-    const [category, setCategory] = useState('');
-    const [address, setAddress] = useState('');
-    const [address2, setAddress2] = useState('');
-    const [phone, setPhone] = useState('');
-    const [twitter, setTwitter] = useState('');
-    const [lat, setLat] = useState('');
-    const [lng, setLng] = useState('');
-    const [data, setData] = useState({ restaurants: [] });
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-    useEffect(() => {
-        if (loading) {
-            fetch('https://s3.amazonaws.com/br-codingexams/restaurants.json')
-                .then((rsp) => {
-                    if (rsp.status === 200) {
-                        return rsp.json();
-                    }
-                })
-                .then((data) => {
-                    setData(data);
-                    setLoading(false);
-                })
-                .catch((err) => console.log(err));
-        }
-    }, [loading]);
+class List extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            popup: false,
+            title: '',
+            category: '',
+            address: '',
+            address2: '',
+            phone: '',
+            twitter: '',
+            lat: '',
+            lng: '',
+        };
+    }
 
     /**
      * Handles click event on our Card component
      *
      * @param {Event} event
      */
-    function handleClick(event) {
+    handleClick = (event) => {
         event.preventDefault();
         event.persist();
         const {
@@ -50,60 +46,97 @@ function List() {
             lat,
             lng,
         } = event.currentTarget.dataset;
-        setTitle(title);
-        setCategory(category);
-        setAddress(address);
-        setAddress2(address2);
-        setPhone(phone);
-        setTwitter(twitter);
-        setPopup(true);
-        setLat(lat);
-        setLng(lng);
-    }
+        this.setState({
+            title,
+            category,
+            address,
+            address2,
+            phone,
+            twitter,
+            lat,
+            lng,
+        });
+    };
 
     /**
      * Handles closing the map window and details module
      *
      * @param {Event} event
      */
-    function handleClose(event) {
+    handleClose = (event) => {
         event.preventDefault();
-        setPopup(false);
+        this.setState({ popup: false });
+    };
+
+    isFetching = () => {
+        const { loading } = this.props;
+        fetchRestaurants();
+
+        if (loading === false) {
+            return false;
+        }
+
+        return true;
+    };
+
+    componentWillMount() {
+        const { fetchRestaurants } = this.props;
+        fetchRestaurants();
     }
 
-    return (
-        <div className="position-relative">
-            <Popup
-                title={title}
-                category={category}
-                address={address}
-                address2={address2}
-                phone={phone}
-                twitter={twitter}
-                slide={popup ? 'slide-in' : ''}
-                handleClose={handleClose}
-                lat={lat}
-                lng={lng}
-            />
-            <div className="flexbox _wrap _space-between">
-                {loading ? <Loading /> : null}
+    render() {
+        const { title, category, address, address2, phone, twitter, popup, lat, lng } = this.state;
+        const { data } = this.props;
+        return (
+            <div className="position-relative">
+                <Popup
+                    title={title}
+                    category={category}
+                    address={address}
+                    address2={address2}
+                    phone={phone}
+                    twitter={twitter}
+                    slide={popup ? 'slide-in' : ''}
+                    handleClose={this.handleClose}
+                    lat={lat}
+                    lng={lng}
+                />
+                <div className="flexbox _wrap _space-between">
+                    {this.isFetching() ? <Loading /> : null}
 
-                {data.restaurants.map(
-                    ({ name, category, backgroundImageURL, location, contact }, index) => (
-                        <Card
-                            key={index}
-                            title={name}
-                            category={category}
-                            image={backgroundImageURL}
-                            handleClick={handleClick}
-                            location={location}
-                            contact={contact}
-                        />
-                    )
-                )}
+                    {/* {data.restaurants.map(
+                        ({ name, category, backgroundImageURL, location, contact }, index) => (
+                            <Card
+                                key={index}
+                                title={name}
+                                category={category}
+                                image={backgroundImageURL}
+                                handleClick={this.handleClick}
+                                location={location}
+                                contact={contact}
+                            />
+                        )
+                    )} */}
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
-export default List;
+const mapStateToProps = (state) => ({
+    error: getRestaurantsError(state),
+    data: getRestaurants(state),
+    pending: getRestaurantsPending(state),
+});
+
+const mapDispatchToProps = (dispatch) =>
+    bindActionCreators(
+        {
+            fetchRestaurants: fetchRestaurants,
+        },
+        dispatch
+    );
+
+export default connect(mapStateToProps, mapDispatchToProps)(List);
+
+// export default List;
