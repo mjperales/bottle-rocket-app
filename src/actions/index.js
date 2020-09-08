@@ -13,14 +13,14 @@ export function fetchRestaurantsPending() {
 export function fetchRestaurantsSuccess(data) {
     return {
         type: FETCH_RESTAURANT_SUCCESS,
-        data,
+        payload: { data },
     };
 }
 
 export function fetchRestaurantsError(error) {
     return {
         type: FETCH_RESTAURANT_ERROR,
-        error,
+        payload: { error },
     };
 }
 
@@ -29,20 +29,22 @@ export function fetchRestaurants() {
         dispatch(fetchRestaurantsPending());
 
         fetch('https://s3.amazonaws.com/br-codingexams/restaurants.json')
-            .then((rsp) => {
-                if (rsp.status === 200) {
-                    return rsp.json();
-                }
-            })
-            .then((rsp) => {
-                if (rsp.error) {
-                    throw rsp.error;
-                }
-                dispatch(fetchRestaurantsSuccess(rsp.data));
-                return rsp.data;
+            .then(handleErrors)
+            .then((rsp) => rsp.json())
+            .then((data) => {
+                dispatch(fetchRestaurantsSuccess(data));
+                return data;
             })
             .catch((error) => {
                 dispatch(fetchRestaurantsError(error));
             });
     };
+}
+
+// Handle HTTP errors since fetch won't.
+function handleErrors(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
 }

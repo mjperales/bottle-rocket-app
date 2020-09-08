@@ -2,15 +2,9 @@ import React, { Component } from 'react';
 import Card from './Card';
 import Loading from './Loading';
 import Popup from './Popup';
-import {
-    getRestaurants,
-    getRestaurantsPending,
-    getRestaurantsError,
-} from '../reducers/restaurant-reducer';
 import { fetchRestaurants } from '../actions';
 
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 class List extends Component {
     constructor(props) {
@@ -80,13 +74,12 @@ class List extends Component {
     };
 
     componentWillMount() {
-        const { fetchRestaurants } = this.props;
-        fetchRestaurants();
+        this.props.dispatch(fetchRestaurants());
     }
 
     render() {
         const { title, category, address, address2, phone, twitter, popup, lat, lng } = this.state;
-        const { data } = this.props;
+        const { data, error } = this.props;
         return (
             <div className="position-relative">
                 <Popup
@@ -102,9 +95,10 @@ class List extends Component {
                     lng={lng}
                 />
                 <div className="flexbox _wrap _space-between">
+                    {error ? <div> {error} </div> : null}
                     {this.isFetching() ? <Loading /> : null}
 
-                    {/* {data.restaurants.map(
+                    {data.restaurants.map(
                         ({ name, category, backgroundImageURL, location, contact }, index) => (
                             <Card
                                 key={index}
@@ -116,7 +110,7 @@ class List extends Component {
                                 contact={contact}
                             />
                         )
-                    )} */}
+                    )}
                 </div>
             </div>
         );
@@ -124,19 +118,11 @@ class List extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    error: getRestaurantsError(state),
-    data: getRestaurants(state),
-    pending: getRestaurantsPending(state),
+    error: state.items.error,
+    data: state.items.data,
+    loading: state.items.loading,
 });
 
-const mapDispatchToProps = (dispatch) =>
-    bindActionCreators(
-        {
-            fetchRestaurants: fetchRestaurants,
-        },
-        dispatch
-    );
-
-export default connect(mapStateToProps, mapDispatchToProps)(List);
+export default connect(mapStateToProps)(List);
 
 // export default List;
