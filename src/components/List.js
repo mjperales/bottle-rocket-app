@@ -49,6 +49,8 @@ function List({ loading, data, error, dispatch }) {
             lat,
             lng,
         });
+
+        setPopup(true);
     };
 
     /**
