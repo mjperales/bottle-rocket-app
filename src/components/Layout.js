@@ -1,11 +1,11 @@
 import React from 'react';
 import Header from './Header';
 
-function Layout(props) {
+function Layout({ children }) {
     return (
         <div className="layout-container">
             <Header />
-            <main className="layout-constrain top18 below16">{props.children}</main>
+            <main className="layout-constrain top18 below16">{children}</main>
         </div>
     );
 }

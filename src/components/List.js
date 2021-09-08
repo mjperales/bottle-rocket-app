@@ -1,46 +1,40 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from './Card';
 import Loading from './Loading';
 import Popup from './Popup';
+import Error from './Error';
 import { fetchRestaurants } from '../actions';
-
 import { connect } from 'react-redux';
 
-class List extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            popup: false,
-            title: '',
-            category: '',
-            address: '',
-            address2: '',
-            phone: '',
-            twitter: '',
-            lat: '',
-            lng: '',
-        };
-    }
+function List({ loading, data, error, dispatch }) {
+    const [popup, setPopup] = useState(false);
+    const [cardInfo, setCardInfo] = useState({
+        title: '',
+        category: '',
+        address: '',
+        address2: '',
+        phone: '',
+        twitter: '',
+        lat: '',
+        lng: '',
+    });
+
+    useEffect(() => {
+        dispatch(fetchRestaurants());
+    }, [dispatch]);
 
     /**
      * Handles click event on our Card component
      *
      * @param {Event} event
      */
-    handleClick = (event) => {
+    const handleClick = (event) => {
         event.preventDefault();
         event.persist();
-        const {
-            title,
-            category,
-            address,
-            address2,
-            phone,
-            twitter,
-            lat,
-            lng,
-        } = event.currentTarget.dataset;
-        this.setState({
+        const { title, category, address, address2, phone, twitter, lat, lng } =
+            event.currentTarget.dataset;
+
+        setCardInfo({
             title,
             category,
             address,
@@ -57,13 +51,12 @@ class List extends Component {
      *
      * @param {Event} event
      */
-    handleClose = (event) => {
+    const handleClose = (event) => {
         event.preventDefault();
-        this.setState({ popup: false });
+        setPopup(false);
     };
 
-    isFetching = () => {
-        const { loading } = this.props;
+    const isFetching = () => {
         fetchRestaurants();
 
         if (loading === false) {
@@ -73,48 +66,41 @@ class List extends Component {
         return true;
     };
 
-    componentWillMount() {
-        this.props.dispatch(fetchRestaurants());
-    }
+    const { title, category, address, address2, phone, twitter, lat, lng } = cardInfo;
+    return (
+        <div className="position-relative">
+            <Popup
+                title={title}
+                category={category}
+                address={address}
+                address2={address2}
+                phone={phone}
+                twitter={twitter}
+                slide={popup ? 'slide-in' : ''}
+                handleClose={handleClose}
+                lat={lat}
+                lng={lng}
+            />
+            <div className="flexbox _wrap _space-between">
+                {error ? <Error error={error} /> : null}
+                {isFetching() ? <Loading /> : null}
 
-    render() {
-        const { title, category, address, address2, phone, twitter, popup, lat, lng } = this.state;
-        const { data, error } = this.props;
-        return (
-            <div className="position-relative">
-                <Popup
-                    title={title}
-                    category={category}
-                    address={address}
-                    address2={address2}
-                    phone={phone}
-                    twitter={twitter}
-                    slide={popup ? 'slide-in' : ''}
-                    handleClose={this.handleClose}
-                    lat={lat}
-                    lng={lng}
-                />
-                <div className="flexbox _wrap _space-between">
-                    {error ? <div> {error} </div> : null}
-                    {this.isFetching() ? <Loading /> : null}
-
-                    {data.restaurants.map(
-                        ({ name, category, backgroundImageURL, location, contact }, index) => (
-                            <Card
-                                key={index}
-                                title={name}
-                                category={category}
-                                image={backgroundImageURL}
-                                handleClick={this.handleClick}
-                                location={location}
-                                contact={contact}
-                            />
-                        )
-                    )}
-                </div>
+                {data.restaurants.map(
+                    ({ name, category, backgroundImageURL, location, contact }, index) => (
+                        <Card
+                            key={index}
+                            title={name}
+                            category={category}
+                            image={backgroundImageURL}
+                            handleClick={handleClick}
+                            location={location}
+                            contact={contact}
+                        />
+                    )
+                )}
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 const mapStateToProps = (state) => ({
@@ -124,5 +110,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(List);
-
-// export default List;

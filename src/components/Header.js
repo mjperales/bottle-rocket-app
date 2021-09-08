@@ -1,6 +1,4 @@
 import React from 'react';
-// I usually use SVGs for icons
-// We don't have to worry about retina display with SVGs
 import MapIcon from '../library/images/icon_map@2x.png';
 
 function Header() {
