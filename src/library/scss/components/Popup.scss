@@ -10,14 +10,14 @@
     left: 0;
     right: 0;
     bottom: 0;
-    top: 0;
+    top: 10%;
     transform: translateX(-99999px);
     margin-left: auto;
     margin-right: auto;
     width: 80%;
     z-index: 9999;
 
-    @include media($medium-screen) {
+    @include media($large-screen) {
         width: 60%;
     }
 
