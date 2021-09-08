@@ -19,6 +19,11 @@ function List({ loading, data, error, dispatch }) {
         lng: '',
     });
 
+    /**
+     * Http request for restaurants
+     *
+     * Grab from redux store
+     */
     useEffect(() => {
         dispatch(fetchRestaurants());
     }, [dispatch]);
@@ -56,6 +61,13 @@ function List({ loading, data, error, dispatch }) {
         setPopup(false);
     };
 
+    /**
+     * Fetch restaurants if needed
+     *
+     * Use to display loading icon
+     *
+     * @returns bool
+     */
     const isFetching = () => {
         fetchRestaurants();
 
