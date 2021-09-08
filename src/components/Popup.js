@@ -1,5 +1,6 @@
 import React from 'react';
 import MyMap from '../components/MyMap';
+import Map from '../library/images/details-map-temp.png';
 import '../library/scss/components/Popup.scss';
 
 const Popup = ({
@@ -20,8 +21,8 @@ const Popup = ({
                 X
             </button>
             <div className="popup__map">
-                {/* <img src={Map} alt="Map" /> */}
-                <MyMap title={title} lat={lat} lng={lng} />
+                <img src={Map} alt="Map" />
+                {/* <MyMap title={title} lat={lat} lng={lng} /> */}
             </div>
             <div className="popup__title background _green">
                 <h2 className="h5 popup-heading__title">{title}</h2>
