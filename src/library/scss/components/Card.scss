@@ -9,13 +9,16 @@
     cursor: pointer;
     height: 180px;
     margin: $space-default;
-    max-width: 300px;
     padding: 0;
     position: relative;
     width: 100%;
 
+    @include media($medium-screen) {
+        width: 45%;
+    }
+
     @include media($large-screen) {
-        max-width: 400px;
+        width: 30%;
     }
 
     .card__image {
