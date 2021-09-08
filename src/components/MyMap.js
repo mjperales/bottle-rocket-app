@@ -22,6 +22,6 @@ const style = {
     height: '400px',
 };
 
-export default GoogleApiWrapper((props) => ({
+export default GoogleApiWrapper(() => ({
     apiKey: process.env.REACT_APP_GOOGLE_MAP_KEY,
 }))(MapContainer);
