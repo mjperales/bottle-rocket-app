@@ -4,6 +4,12 @@ Take home assignment for Bottle Rocket.
 
 Build a simple React application using redux. Application should be able to make an HttpRequest to the API Bottle Rocket provides. They also provide mockups and icons for the UI. Application should be able to connect to Google Maps API to display a map of the selected restaurant's location. Application must be responsive.
 
+### React Context
+
+Checkout `using-react-context` branch to view an example that uses React Context instead of Redux and Thunk.
+
+`git checkout using-react-context`
+
 ## Install dependencies
 
 Use `npm install` to install dependencies.
