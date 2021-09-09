@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Card from './Card';
 import Loading from './Loading';
 import Popup from './Popup';
 import Error from './Error';
-import { fetchRestaurants } from '../actions';
-import { connect } from 'react-redux';
+import { useRestaurants } from '../context/RestaurantsProvider';
 
-function List({ loading, data, error, dispatch }) {
+function List() {
     const [popup, setPopup] = useState(false);
     const [cardInfo, setCardInfo] = useState({
         title: '',
@@ -18,15 +17,7 @@ function List({ loading, data, error, dispatch }) {
         lat: '',
         lng: '',
     });
-
-    /**
-     * Http request for restaurants
-     *
-     * Grab from redux store
-     */
-    useEffect(() => {
-        dispatch(fetchRestaurants());
-    }, [dispatch]);
+    const { data, loading, error } = useRestaurants();
 
     /**
      * Handles click event on our Card component
@@ -63,23 +54,6 @@ function List({ loading, data, error, dispatch }) {
         setPopup(false);
     };
 
-    /**
-     * Fetch restaurants if needed
-     *
-     * Use to display loading icon
-     *
-     * @returns bool
-     */
-    const isFetching = () => {
-        fetchRestaurants();
-
-        if (loading === false) {
-            return false;
-        }
-
-        return true;
-    };
-
     const { title, category, address, address2, phone, twitter, lat, lng } = cardInfo;
     return (
         <div className="position-relative">
@@ -97,7 +71,7 @@ function List({ loading, data, error, dispatch }) {
             />
             <div className="flexbox _wrap _space-between">
                 {error ? <Error error={error} /> : null}
-                {isFetching() ? <Loading /> : null}
+                {loading ? <Loading /> : null}
 
                 {data.restaurants.map(
                     ({ name, category, backgroundImageURL, location, contact }, index) => (
@@ -117,10 +91,4 @@ function List({ loading, data, error, dispatch }) {
     );
 }
 
-const mapStateToProps = (state) => ({
-    error: state.items.error,
-    data: state.items.data,
-    loading: state.items.loading,
-});
-
-export default connect(mapStateToProps)(List);
+export default List;
