@@ -29,7 +29,7 @@ export function fetchRestaurants() {
         dispatch(fetchRestaurantsPending());
 
         fetch('https://s3.amazonaws.com/br-codingexams/restaurants.json')
-            .then(handleErrors)
+            .then((rsp) => handleErrors(rsp))
             .then((rsp) => rsp.json())
             .then((data) => {
                 dispatch(fetchRestaurantsSuccess(data));
