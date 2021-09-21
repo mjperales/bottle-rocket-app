@@ -1,5 +1,5 @@
 import React from 'react';
-import MyMap from '../components/MyMap';
+// import MyMap from '../components/MyMap';
 import Map from '../library/images/details-map-temp.png';
 import '../library/scss/components/Popup.scss';
 
